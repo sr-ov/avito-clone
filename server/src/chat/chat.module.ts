@@ -1,6 +1,6 @@
 import {
-	Advertisement,
-	AdvertisementSchema,
+    Advertisement,
+    AdvertisementSchema,
 } from './../advertisement/advertisement.schema'
 import { Module } from '@nestjs/common'
 import { ChatGateway } from './chat.gateway'
@@ -14,18 +14,18 @@ import { MessageModule } from 'src/message/message.module'
 import { Message, MessageSchema } from 'src/message/message.schema'
 
 @Module({
-	providers: [ChatGateway, ChatService],
-	controllers: [ChatController],
-	imports: [
-		JwtAuthGuard,
-		MongooseModule.forFeature([
-			{ name: Chat.name, schema: ChatSchema },
-			{ name: User.name, schema: UserSchema },
-			{ name: Advertisement.name, schema: AdvertisementSchema },
-			{ name: Message.name, schema: MessageSchema },
-		]),
-		MessageModule,
-	],
-	exports: [ChatService],
+    providers: [ChatGateway, ChatService],
+    controllers: [ChatController],
+    imports: [
+        JwtAuthGuard,
+        MongooseModule.forFeature([
+            { name: Chat.name, schema: ChatSchema },
+            { name: User.name, schema: UserSchema },
+            { name: Advertisement.name, schema: AdvertisementSchema },
+            { name: Message.name, schema: MessageSchema },
+        ]),
+        MessageModule,
+    ],
+    exports: [ChatService],
 })
 export class ChatModule {}

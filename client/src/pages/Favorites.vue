@@ -1,20 +1,20 @@
 <template lang="pug">
 the-main
-	template(#center)
-		h1.page-title Избранное
-		template(v-if="favorites?.length" )
-			app-ad-card(
-				v-for="ad in favorites"
-				:key="ad._id"
-				:imgSrc="ad.images.url"
-				:url="`/${ad.categoryId}/${ad._id}`"
-				:top="ad.name"
-				:md="`${ad.price} ₽`"
-				:btm="ad.address"
-			)
-				el-row.wrapper
-					app-button-favorite(:id="ad._id")
-		el-empty(v-else description="Пусто")
+    template(#center)
+        h1.page-title Избранное
+        template(v-if="favorites?.length" )
+            app-ad-card(
+                v-for="ad in favorites"
+                :key="ad._id"
+                :imgSrc="ad.images.url"
+                :url="`/${ad.categoryId}/${ad._id}`"
+                :top="ad.name"
+                :md="`${ad.price} ₽`"
+                :btm="ad.address"
+            )
+                el-row.wrapper
+                    app-button-favorite(:id="ad._id")
+        el-empty(v-else description="Пусто")
 </template>
 
 <script lang="ts">

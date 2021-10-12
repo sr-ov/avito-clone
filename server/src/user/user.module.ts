@@ -16,22 +16,22 @@ import {
 import { AdvertisementService } from 'src/advertisement/advertisement.service'
 
 @Module({
-	controllers: [UserController],
-	providers: [UserService, JwtStrategy, AdvertisementService],
-	imports: [
-		MongooseModule.forFeature([
-			{ name: User.name, schema: UserSchema },
-			{ name: Advertisement.name, schema: AdvertisementSchema },
-		]),
-		PassportModule,
-		JwtModule.register({
-			secret: process.env.JWT_SECRET ?? 'SECRET',
-			signOptions: {
-				expiresIn: '24h',
-			},
-		}),
-		forwardRef(() => AdvertisementModule),
-		FileModule,
-	],
+    controllers: [UserController],
+    providers: [UserService, JwtStrategy, AdvertisementService],
+    imports: [
+        MongooseModule.forFeature([
+            { name: User.name, schema: UserSchema },
+            { name: Advertisement.name, schema: AdvertisementSchema },
+        ]),
+        PassportModule,
+        JwtModule.register({
+            secret: process.env.JWT_SECRET ?? 'SECRET',
+            signOptions: {
+                expiresIn: '24h',
+            },
+        }),
+        forwardRef(() => AdvertisementModule),
+        FileModule,
+    ],
 })
 export class UserModule {}

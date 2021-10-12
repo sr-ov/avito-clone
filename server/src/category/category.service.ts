@@ -7,16 +7,16 @@ import { CategoryDto } from './dto/category.dto'
 
 @Injectable()
 export class CategoryService {
-	constructor(
-		@InjectModel(Category.name)
-		private categoryModel: Model<CategoryDocument>,
-	) {}
+    constructor(
+        @InjectModel(Category.name)
+        private categoryModel: Model<CategoryDocument>,
+    ) {}
 
-	async create(dto: CategoryDto): Promise<Category> {
-		return this.categoryModel.create(dto)
-	}
+    async create(dto: CategoryDto): Promise<Category> {
+        return this.categoryModel.create(dto)
+    }
 
-	async getAll(): Promise<Category[]> {
-		return this.categoryModel.find().select(['-__v', '-advertisements'])
-	}
+    async getAll(): Promise<Category[]> {
+        return this.categoryModel.find().select(['-__v', '-advertisements'])
+    }
 }

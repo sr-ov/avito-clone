@@ -5,15 +5,15 @@ import { CategoryDto } from './dto/category.dto'
 
 @Controller('category')
 export class CategoryController {
-	constructor(private categoryService: CategoryService) {}
+    constructor(private categoryService: CategoryService) {}
 
-	@Post()
-	create(@Body() dto: CategoryDto) {
-		return this.categoryService.create(dto)
-	}
+    @Post()
+    create(@Body() dto: CategoryDto) {
+        return this.categoryService.create(dto)
+    }
 
-	@Get()
-	getAll() {
-		return this.categoryService.getAll()
-	}
+    @Get()
+    getAll() {
+        return this.categoryService.getAll()
+    }
 }

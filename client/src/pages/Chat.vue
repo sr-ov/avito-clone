@@ -1,52 +1,52 @@
 <template lang="pug">
 the-main
-	template(#center)
-		el-row(style="margin-bottom: 30px" justify="center").top
-			div(v-if="interlocutor && chat.ad").wrapper
-				div(:class="{ active: isInterlocutorOnline }").user-name
-					| {{ interlocutor.name || interlocutor.email }}
-				.ad-name {{ chat.ad.name }}
-		el-row(style="margin-bottom: 30px")
-			el-col(ref="dialogRef" :span="24").dialog
-				el-row(
-					v-if="messages.length"
-					v-for="el in messages"
-					:key="el.id"
-				)
-					el-col
-						el-row(justify="center").date {{ el.date }}
-						div(
-							v-for="item in el.items"
-							:key="item.id"
-							:class="{ right: item.toRight }"
-						).msg-wrapper
-							.icon-wrapper(v-if="!item.toRight")
-								i(v-if="!interlocutorAvatar").el-icon-user-solid.user__avatar
-								img(
-									v-else
-									:src="interlocutorAvatar"
-								).user__avatar
-							div(
-								v-for="msg in item.messages"
-								:key="msg.id"
-								:class="{ right: item.toRight }"
-							).msg
-								span.text {{ msg.text }}
-								span {{ msg.date }}
-				p(v-else).no-messages нет сообщений
-		el-row
-			el-col(:span="24")
-				el-form(@submit.prevent)
-					el-form-item
-						el-row(:gutter="35")
-							el-col(:span="20")
-								el-input(
-									v-model="msg"
-									@keyup.enter="msgToServer"
-									placeholder="Введите сообщение"
-								)
-							el-col(:span="3")
-								el-button(@click="msgToServer" type="primary") Отправить
+    template(#center)
+        el-row(style="margin-bottom: 30px" justify="center").top
+            div(v-if="interlocutor && chat.ad").wrapper
+                div(:class="{ active: isInterlocutorOnline }").user-name
+                    | {{ interlocutor.name || interlocutor.email }}
+                .ad-name {{ chat.ad.name }}
+        el-row(style="margin-bottom: 30px")
+            el-col(ref="dialogRef" :span="24").dialog
+                el-row(
+                    v-if="messages.length"
+                    v-for="el in messages"
+                    :key="el.id"
+                )
+                    el-col
+                        el-row(justify="center").date {{ el.date }}
+                        div(
+                            v-for="item in el.items"
+                            :key="item.id"
+                            :class="{ right: item.toRight }"
+                        ).msg-wrapper
+                            .icon-wrapper(v-if="!item.toRight")
+                                i(v-if="!interlocutorAvatar").el-icon-user-solid.user__avatar
+                                img(
+                                    v-else
+                                    :src="interlocutorAvatar"
+                                ).user__avatar
+                            div(
+                                v-for="msg in item.messages"
+                                :key="msg.id"
+                                :class="{ right: item.toRight }"
+                            ).msg
+                                span.text {{ msg.text }}
+                                span {{ msg.date }}
+                p(v-else).no-messages нет сообщений
+        el-row
+            el-col(:span="24")
+                el-form(@submit.prevent)
+                    el-form-item
+                        el-row(:gutter="35")
+                            el-col(:span="20")
+                                el-input(
+                                    v-model="msg"
+                                    @keyup.enter="msgToServer"
+                                    placeholder="Введите сообщение"
+                                )
+                            el-col(:span="3")
+                                el-button(@click="msgToServer" type="primary") Отправить
 </template>
 
 <script lang="ts">

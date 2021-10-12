@@ -12,71 +12,71 @@ import { Message, MessageDocument } from 'src/message/message.schema'
 
 @Injectable()
 export class ChatService {
-	constructor(
-		@InjectModel(Chat.name)
-		private chatModel: Model<ChatDocument>,
-		@InjectModel(Advertisement.name)
-		private adModel: Model<AdvertisementDocument>,
-		@InjectModel(User.name)
-		private userModel: Model<UserDocument>,
-		@InjectModel(Message.name)
-		private messageModel: Model<MessageDocument>,
-	) {}
+    constructor(
+        @InjectModel(Chat.name)
+        private chatModel: Model<ChatDocument>,
+        @InjectModel(Advertisement.name)
+        private adModel: Model<AdvertisementDocument>,
+        @InjectModel(User.name)
+        private userModel: Model<UserDocument>,
+        @InjectModel(Message.name)
+        private messageModel: Model<MessageDocument>,
+    ) {}
 
-	async create(
-		id: string,
-		{ userId, ownerId }: ChatDto,
-	): Promise<ChatDocument> {
-		const chat = await this.chatModel.create({
-			user: Types.ObjectId(userId),
-			owner: Types.ObjectId(ownerId),
-			ad: Types.ObjectId(id),
-			room: id + userId + ownerId,
-		})
+    async create(
+        id: string,
+        { userId, ownerId }: ChatDto,
+    ): Promise<ChatDocument> {
+        const chat = await this.chatModel.create({
+            user: Types.ObjectId(userId),
+            owner: Types.ObjectId(ownerId),
+            ad: Types.ObjectId(id),
+            room: id + userId + ownerId,
+        })
 
-		const c = await chat
-			.populate('user', 'name email')
-			.populate('owner', 'name email')
-			.populate('ad', 'name')
-			.execPopulate()
+        const c = await chat
+            .populate('user', 'name email')
+            .populate('owner', 'name email')
+            .populate('ad', 'name')
+            .execPopulate()
 
-		return c
-	}
+        return c
+    }
 
-	async getOne(id: string, dto: ChatDto, userId: string): Promise<Chat> {
-		const user_id = Types.ObjectId(userId)
-		const chat = await this.chatModel
-			.findOne({
-				$or: [{ user: user_id }, { owner: user_id }],
-			})
-			.populate('user', 'name email avatar')
-			.populate('owner', 'name email avatar')
-			.populate('ad', 'name')
-			.populate('messages')
+    async getOne(id: string, dto: ChatDto, userId: string): Promise<Chat> {
+        const user_id = Types.ObjectId(userId)
+        const chat = await this.chatModel
+            .findOne({
+                $or: [{ user: user_id }, { owner: user_id }],
+            })
+            .populate('user', 'name email avatar')
+            .populate('owner', 'name email avatar')
+            .populate('ad', 'name')
+            .populate('messages')
 
-		return chat ?? this.create(id, dto)
-	}
+        return chat ?? this.create(id, dto)
+    }
 
-	async getAll(id: string): Promise<Chat[]> {
-		const userId = Types.ObjectId(id)
-		const chats = await this.chatModel
-			.find({
-				$or: [{ owner: userId }, { user: userId }],
-			})
-			.populate('user', 'name email avatar')
-			.populate('owner', 'name email avatar')
-			.populate('ad', 'name images')
-			.select('-room -__v')
+    async getAll(id: string): Promise<Chat[]> {
+        const userId = Types.ObjectId(id)
+        const chats = await this.chatModel
+            .find({
+                $or: [{ owner: userId }, { user: userId }],
+            })
+            .populate('user', 'name email avatar')
+            .populate('owner', 'name email avatar')
+            .populate('ad', 'name images')
+            .select('-room -__v')
 
-		return chats
-	}
+        return chats
+    }
 
-	async remove(chatId: string, userId: string): Promise<Chat[]> {
-		await Promise.all([
-			this.chatModel.findOneAndDelete({ _id: chatId }),
-			this.messageModel.deleteMany({ chatId: Types.ObjectId(chatId) }),
-		])
+    async remove(chatId: string, userId: string): Promise<Chat[]> {
+        await Promise.all([
+            this.chatModel.findOneAndDelete({ _id: chatId }),
+            this.messageModel.deleteMany({ chatId: Types.ObjectId(chatId) }),
+        ])
 
-		return this.getAll(userId)
-	}
+        return this.getAll(userId)
+    }
 }

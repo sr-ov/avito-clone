@@ -1,13 +1,13 @@
 <template lang="pug">
 button.btn
-	slot
+    slot
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-	name: 'AppButton',
+    name: 'AppButton',
 })
 </script>
 
@@ -15,16 +15,16 @@ export default defineComponent({
 @import '@/assets/scss/_vars.scss';
 
 .btn {
-	background-color: $accent-color;
-	color: #fff;
-	border-radius: 5px;
-	padding: 10px 15px;
-	font-size: 14px;
-	line-height: 16px;
+    background-color: $accent-color;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 14px;
+    line-height: 16px;
 }
 
 .btn.primary-color {
-	background-color: inherit;
-	color: $primary-color;
+    background-color: inherit;
+    color: $primary-color;
 }
 </style>

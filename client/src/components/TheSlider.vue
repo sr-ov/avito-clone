@@ -1,44 +1,44 @@
 <template lang="pug">
 .slider
-	.slider-wrapper
-		vueper-slides(
-			ref="sliderRef"
-			:touchable="false"
-			:autoplay="false"
-			:bullets="false"
-			fade
-			fixed-height="357px"
-			@slide="onChangeSlide"
-		).no-shadow
-			vueper-slide(
-				v-for="(slide, i) in images"
-				:key="slide"
-				:image="slide"
-				@click="openGallery($event, i)"
-			)
+    .slider-wrapper
+        vueper-slides(
+            ref="sliderRef"
+            :touchable="false"
+            :autoplay="false"
+            :bullets="false"
+            fade
+            fixed-height="357px"
+            @slide="onChangeSlide"
+        ).no-shadow
+            vueper-slide(
+                v-for="(slide, i) in images"
+                :key="slide"
+                :image="slide"
+                @click="openGallery($event, i)"
+            )
 
-	.thumbs-slider-wrapper
-		vueper-slides(
-			ref="thumbsSliderRef"
-			:visible-slides="images.length"
-			:bullets="false"
-			:touchable="false"
-			:gap="2.5"
-			fixed-height="53px"
-			:arrows="false"
-			@slide="onChangeSlide"
-		).no-shadow
-			vueper-slide(
-				v-for="(slide, i) in images"
-				:key="slide"
-				:image="slide"
-				@click="$refs.thumbsSliderRef.goToSlide(i)"
-			).thumbs-slide
-	app-modal(
-		v-model="IsOpenGallery"
-		custom-class="slider-modal"
-	)
-		img(:src="currentImg").img-modal
+    .thumbs-slider-wrapper
+        vueper-slides(
+            ref="thumbsSliderRef"
+            :visible-slides="images.length"
+            :bullets="false"
+            :touchable="false"
+            :gap="2.5"
+            fixed-height="53px"
+            :arrows="false"
+            @slide="onChangeSlide"
+        ).no-shadow
+            vueper-slide(
+                v-for="(slide, i) in images"
+                :key="slide"
+                :image="slide"
+                @click="$refs.thumbsSliderRef.goToSlide(i)"
+            ).thumbs-slide
+    app-modal(
+        v-model="IsOpenGallery"
+        custom-class="slider-modal"
+    )
+        img(:src="currentImg").img-modal
 </template>
 
 <script lang="ts">

@@ -10,16 +10,16 @@ import { AdvertisementService } from './advertisement.service'
 import { User, UserSchema } from 'src/user/user.schema'
 
 @Module({
-	controllers: [AdvertisementController],
-	providers: [AdvertisementService],
-	imports: [
-		MongooseModule.forFeature([
-			{ name: Advertisement.name, schema: AdvertisementSchema },
-			{ name: User.name, schema: UserSchema },
-		]),
-		JwtAuthGuard,
-		forwardRef(() => UserModule),
-		FileModule,
-	],
+    controllers: [AdvertisementController],
+    providers: [AdvertisementService],
+    imports: [
+        MongooseModule.forFeature([
+            { name: Advertisement.name, schema: AdvertisementSchema },
+            { name: User.name, schema: UserSchema },
+        ]),
+        JwtAuthGuard,
+        forwardRef(() => UserModule),
+        FileModule,
+    ],
 })
 export class AdvertisementModule {}

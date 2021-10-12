@@ -1,19 +1,19 @@
 <template lang="pug">
 header.header.container
-	.grid
-		.left
-			router-link(to="/").logo
-				img(src="@/assets/images/logo.svg" alt="logo")
-			the-nav
-		.right
-			app-button(
-				v-if="!isAuth"
-				@click="openModal"
-			).primary-color Вход и регистрация
-			the-user-menu(v-else)
-			app-button(@click="login") Подать объявление
-	div(v-if="isVisible" style="margin-top: 24px").grid
-		the-search
+    .grid
+        .left
+            router-link(to="/").logo
+                img(src="@/assets/images/logo.svg" alt="logo")
+            the-nav
+        .right
+            app-button(
+                v-if="!isAuth"
+                @click="openModal"
+            ).primary-color Вход и регистрация
+            the-user-menu(v-else)
+            app-button(@click="login") Подать объявление
+    div(v-if="isVisible" style="margin-top: 24px").grid
+        the-search
 </template>
 
 <script lang="ts">

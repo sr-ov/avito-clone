@@ -6,7 +6,7 @@ el-empty(description="Страница не найдена")
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-	name: 'NotFound',
+    name: 'NotFound',
 })
 </script>
 

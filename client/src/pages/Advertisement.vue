@@ -1,34 +1,34 @@
 <template lang="pug">
 the-main
-	template(v-if="!isEmpty" #center)
-		.grid-sm
-			.left
-				div(v-if="isSame").item-options
-					router-link(:to="`/edit-ad/${ad._id}`").item-options__link Редактировать
-					button(@click="onRemoveAd").item-options__link Удалить
-				h1.title {{ ad.name }}
-				the-slider(:images="ad.images" :key="`${ad._id}-${ad.images.length}`")
-				.desc {{ ad.description }}
-			.right
-				.price {{ ad.price }} ₽
-				.user
-					.user__name {{ owner.name || owner.email }}
-					img(
-						v-if="owner.avatar"
-						:src="owner.avatar"
-					).user__avatar
-					i(v-else).el-icon-user-solid.user__avatar
-				.btns(v-if="!isSame")
-					app-button(
-						v-if="isVisible(1)"
-						@click="showPhone = true"
-					).btns__item {{ showPhone ? ad.phone : 'Показать телефон' }}
-					app-button(
-						v-if="isVisible(2)"
-						@click="toChat"
-					).btns__item.btns__item--msg Написать сообщение
-	template(#right)
-		h1 REKLAMA
+    template(v-if="!isEmpty" #center)
+        .grid-sm
+            .left
+                div(v-if="isSame").item-options
+                    router-link(:to="`/edit-ad/${ad._id}`").item-options__link Редактировать
+                    button(@click="onRemoveAd").item-options__link Удалить
+                h1.title {{ ad.name }}
+                the-slider(:images="ad.images" :key="`${ad._id}-${ad.images.length}`")
+                .desc {{ ad.description }}
+            .right
+                .price {{ ad.price }} ₽
+                .user
+                    .user__name {{ owner.name || owner.email }}
+                    img(
+                        v-if="owner.avatar"
+                        :src="owner.avatar"
+                    ).user__avatar
+                    i(v-else).el-icon-user-solid.user__avatar
+                .btns(v-if="!isSame")
+                    app-button(
+                        v-if="isVisible(1)"
+                        @click="showPhone = true"
+                    ).btns__item {{ showPhone ? ad.phone : 'Показать телефон' }}
+                    app-button(
+                        v-if="isVisible(2)"
+                        @click="toChat"
+                    ).btns__item.btns__item--msg Написать сообщение
+    template(#right)
+        h1 REKLAMA
 </template>
 
 <script lang="ts">
