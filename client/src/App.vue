@@ -1,9 +1,9 @@
 <template lang="pug">
 main-layout
-	router-view
+    router-view
 the-auth(
-	:is-open="isOpen"
-	@close="toggle(false)"
+    :is-open="isOpen"
+    @close="toggle(false)"
 )
 </template>
 
